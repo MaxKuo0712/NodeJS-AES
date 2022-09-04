@@ -14,3 +14,10 @@ crypted += cipher.final('binary');
 crypted = Buffer.from(crypted, 'binary').toString('base64');
 
 console.log(crypted);
+
+crypted = Buffer.from(crypted, 'base64').toString('binary');
+let decipher = crypto.createDecipheriv('aes-256-cbc', keyBuf, ivBuf);
+let decoded = decipher.update(crypted, 'binary', 'utf8');
+decoded += decipher.final('utf8');
+
+console.log(decoded);
